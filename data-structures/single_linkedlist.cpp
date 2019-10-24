@@ -5,7 +5,7 @@ using namespace std;
 struct node {
     int data;
     node *next;
-} *head;
+} *head=NULL;
 
 
 void insert(int x){
@@ -53,6 +53,28 @@ void remove(int x){
     delete temp1;
 }
 
+void swap(node *a, node *b){
+    int temp = a->data;
+    a->data = b->data;
+    b->data = temp;
+}
+
+void bubbleSort(){
+    node *ptr;
+    ptr = head;
+
+    if(head == NULL){
+        return;
+    }
+
+    while(ptr->next != NULL){
+        if(ptr->data > ptr->next->data){
+            swap(ptr, ptr->next);
+        }
+        ptr = ptr->next;
+    }
+}
+
 void display(){
     node *temp = head;
     if(temp == NULL){
@@ -75,8 +97,9 @@ void menu(){
     cout << endl << endl;
     cout << "1. Insert" << endl;
     cout << "2. Delete" << endl;
-    cout << "3. Exit" << endl;
-    cout << "Choose [1..2] : ";
+    cout << "3. Sort" << endl;
+    cout << "4. Exit" << endl;
+    cout << "Choose [1..4] : ";
 }
 
 int main(){
@@ -90,7 +113,7 @@ int main(){
             cin >> choice;
             cin.sync();
             cin.clear();
-        } while (choice < 1 || choice > 3);
+        } while (choice < 1 || choice > 4);
 
         switch (choice) {
             case 1:
@@ -104,9 +127,12 @@ int main(){
                 remove(x);
                 break;
             case 3:
+                bubbleSort();
                 break;
+            case 4:
+            break;
         }
-    }while(choice != 3);
+    }while(choice != 4);
     
     return 0;
 }
